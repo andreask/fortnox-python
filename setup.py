@@ -32,5 +32,7 @@ setup(
     ],
     keywords='fortnox integration api',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    install_requires=['requests']
+    install_requires=['requests'],
+    test_suite="tests",
+    tests_require=['responses']
 )
