@@ -17,6 +17,7 @@ class Request:
             response = requests.delete(url, headers=cfg.to_dict())
         else:
             response = requests.delete("%s%s" % (cls.server_url, url), headers=cfg.to_dict())
+        logging.debug(response.json())
         response.raise_for_status()
         return response
 
@@ -27,6 +28,7 @@ class Request:
             response = requests.get(url, params, headers=cfg.to_dict())
         else:
             response = requests.get("%s%s" % (cls.server_url, url), params, headers=cfg.to_dict())
+        logging.debug(response.json())
         if response.status_code == 404:
             raise ObjectNotFound
         else:
@@ -40,6 +42,7 @@ class Request:
             response = requests.post(url, headers=cfg.to_dict(), json=data)
         else:
             response = requests.post("%s%s" % (cls.server_url, url), headers=cfg.to_dict(), json=data)
+        logging.debug(response.json())
         response.raise_for_status()
         return response
 
@@ -50,6 +53,7 @@ class Request:
             response = requests.put(url, headers=cfg.to_dict(), json=data)
         else:
             response = requests.put("%s%s" % (cls.server_url, url), headers=cfg.to_dict(), json=data)
+            logging.debug(response.json())
         if response.status_code == 404:
             raise ObjectNotFound
         else:
