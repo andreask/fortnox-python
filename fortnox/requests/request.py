@@ -12,23 +12,23 @@ class Request:
 
     @classmethod
     def delete(cls, url):
-        logging.debug("DELETE: %s" % url)
+        logging.info("DELETE: %s" % url)
         if url.startswith("http"):
             response = requests.delete(url, headers=cfg.to_dict())
         else:
             response = requests.delete("%s%s" % (cls.server_url, url), headers=cfg.to_dict())
-        logging.debug(response.json())
+        logging.info(response.json())
         response.raise_for_status()
         return response
 
     @classmethod
     def get(cls, url, params = {}):
-        logging.debug("GET: url: %s, params: %s" % (url, params))
+        logging.info("GET: url: %s, params: %s" % (url, params))
         if url.startswith("http"):
             response = requests.get(url, params, headers=cfg.to_dict())
         else:
             response = requests.get("%s%s" % (cls.server_url, url), params, headers=cfg.to_dict())
-        logging.debug(response.json())
+        logging.info(response.json())
         if response.status_code == 404:
             raise ObjectNotFound
         else:
@@ -37,23 +37,23 @@ class Request:
 
     @classmethod
     def post(cls, url, data):
-        logging.debug("POST: url: %s, data: %s" % (url, data))
+        logging.info("POST: url: %s, data: %s" % (url, data))
         if url.startswith("http"):
             response = requests.post(url, headers=cfg.to_dict(), json=data)
         else:
             response = requests.post("%s%s" % (cls.server_url, url), headers=cfg.to_dict(), json=data)
-        logging.debug(response.json())
+        logging.info(response.json())
         response.raise_for_status()
         return response
 
     @classmethod
     def put(cls, url, data):
-        logging.debug("PUT: url: %s, data: %s" % (url, data))
+        logging.info("PUT: url: %s, data: %s" % (url, data))
         if url.startswith("http"):
             response = requests.put(url, headers=cfg.to_dict(), json=data)
         else:
             response = requests.put("%s%s" % (cls.server_url, url), headers=cfg.to_dict(), json=data)
-            logging.debug(response.json())
+            logging.info(response.json())
         if response.status_code == 404:
             raise ObjectNotFound
         else:
