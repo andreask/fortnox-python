@@ -3,12 +3,12 @@
 
 class VoucherRow():
     def __init__(self, json_data = {}):
-        self.account = json_data.get("Account")
-        self.cost_center = json_data.get("CostCenter")
-        self.credit = json_data.get("Credit")
-        self.description = json_data.get("Description")
-        self.debit = json_data.get("Debit")
-        self.project = json_data.get("Project")
+        self.account = json_data.get("Account", 0)
+        self.cost_center = json_data.get("CostCenter", "")
+        self.credit = json_data.get("Credit", 0)
+        self.description = json_data.get("Description", "")
+        self.debit = json_data.get("Debit", 0)
+        self.project = json_data.get("Project", "")
         self.removed = json_data.get("Removed")
         self.transaction_information = json_data.get("TransactionInformation")
 
@@ -20,7 +20,6 @@ class VoucherRow():
 
     def to_dict(self):
         return {
-            "Description": self.description,
             "Debit": self.debit,
             "Account": self.account,
             "Credit": self.credit
