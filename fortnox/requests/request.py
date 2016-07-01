@@ -44,7 +44,7 @@ class Request:
             response = requests.post("%s%s" % (cls.server_url, url), headers=cfg.to_dict(), json=data)
         logging.info(response.json())
         if response.status_code == 400:
-            logger.error(response.json())
+            print(response.json())
         response.raise_for_status()
         return response
 
